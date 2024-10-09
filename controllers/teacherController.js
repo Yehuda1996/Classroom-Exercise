@@ -51,7 +51,7 @@ export const editGrade = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 export const deleteGrade = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { studentId, subject } = req.params;
+    const { studentId, subject } = req.body;
     try {
         const student = yield userModel.findById(studentId);
         if (!student || student.role !== Role.student) {

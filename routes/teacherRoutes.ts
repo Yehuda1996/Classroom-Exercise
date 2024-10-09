@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.get('/users', verifyToken, checkRole(['teacher']), getAllUsers);
 router.route('/grade').post(verifyToken, checkRole(['teacher']), addGrade).put(verifyToken, checkRole(['teacher']), editGrade);
-router.delete('/grade/:studentId/:subject', verifyToken, checkRole(['teacher']), deleteGrade);
+router.delete('/grade/delete', verifyToken, checkRole(['teacher']), deleteGrade);
 router.get('/student/:studentId/grades', verifyToken, checkRole(['teacher']), getStudentsGrades);
 router.get('/student/:studentId/average', verifyToken, checkRole(['teacher']), getStudentGradeAvg);
 router.delete('/student/:studentId', verifyToken, checkRole(['student']), deleteStudent);

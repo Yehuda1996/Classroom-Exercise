@@ -50,7 +50,7 @@ export const editGrade = async (req: Request, res: Response) => {
 };
 
 export const deleteGrade = async (req: Request, res: Response) => {
-    const {studentId, subject} = req.params;
+    const {studentId, subject} = req.body;
     try{
         const student = await userModel.findById(studentId);
         if(!student || student.role !== Role.student){
