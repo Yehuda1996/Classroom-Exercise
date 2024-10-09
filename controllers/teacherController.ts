@@ -84,8 +84,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getStudentsGrades = async (req: Request, res: Response) => {
     const {studentId} = req.params;
+    const studentIdStr = typeof studentId === 'string' ? studentId : String(studentId); 
     try{
-        const student = await userModel.findById(studentId);
+        const student = await userModel.findById(studentIdStr);
         if(!student || student.role !== Role.student){
             res.status(404).json({message: "Student not found."})
         }
@@ -100,8 +101,9 @@ export const getStudentsGrades = async (req: Request, res: Response) => {
 
 export const getStudentGradeAvg = async (req: Request, res: Response) => {
     const {studentId} = req.params;
+    const studentIdStr = typeof studentId === 'string' ? studentId : String(studentId); 
     try{
-        const student = await userModel.findById(studentId);
+        const student = await userModel.findById(studentIdStr);
         if(!student || student.role !== Role.student){
             res.status(404).json({message: "Student not found."})
         }
@@ -118,8 +120,9 @@ export const getStudentGradeAvg = async (req: Request, res: Response) => {
 
 export const deleteStudent = async (req: Request, res: Response) => {
     const {studentId} = req.params;
+    const studentIdStr = typeof studentId === 'string' ? studentId : String(studentId); 
     try{
-        const student = await userModel.findByIdAndDelete({ _id: studentId, role: 'student' });
+        const student = await userModel.findByIdAndDelete({ _id: studentIdStr, role: 'student' });
         if (!student) {
             res.status(404).json({ message: "Student not found." });
         }

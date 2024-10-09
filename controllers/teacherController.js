@@ -82,8 +82,9 @@ export const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, funct
 });
 export const getStudentsGrades = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { studentId } = req.params;
+    const studentIdStr = typeof studentId === 'string' ? studentId : String(studentId);
     try {
-        const student = yield userModel.findById(studentId);
+        const student = yield userModel.findById(studentIdStr);
         if (!student || student.role !== Role.student) {
             res.status(404).json({ message: "Student not found." });
         }
@@ -97,8 +98,9 @@ export const getStudentsGrades = (req, res) => __awaiter(void 0, void 0, void 0,
 });
 export const getStudentGradeAvg = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { studentId } = req.params;
+    const studentIdStr = typeof studentId === 'string' ? studentId : String(studentId);
     try {
-        const student = yield userModel.findById(studentId);
+        const student = yield userModel.findById(studentIdStr);
         if (!student || student.role !== Role.student) {
             res.status(404).json({ message: "Student not found." });
         }
@@ -114,8 +116,9 @@ export const getStudentGradeAvg = (req, res) => __awaiter(void 0, void 0, void 0
 });
 export const deleteStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { studentId } = req.params;
+    const studentIdStr = typeof studentId === 'string' ? studentId : String(studentId);
     try {
-        const student = yield userModel.findByIdAndDelete({ _id: studentId, role: 'student' });
+        const student = yield userModel.findByIdAndDelete({ _id: studentIdStr, role: 'student' });
         if (!student) {
             res.status(404).json({ message: "Student not found." });
         }
