@@ -7,12 +7,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import userModel from "../models/userModel.js";
+import userModel, { Role } from "../models/userModel.js";
 export const addGrade = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { studentId, subject, grade } = req.body;
     try {
         const student = yield userModel.findById(studentId);
-        if (!student || student.role !== student) {
+        if (!student || student.role !== Role.student) {
             res.status(404).json({ message: "Student not found." });
         }
         else {
@@ -33,7 +33,7 @@ export const editGrade = (req, res) => __awaiter(void 0, void 0, void 0, functio
     const { studentId, subject, grade } = req.body;
     try {
         const student = yield userModel.findById(studentId);
-        if (!student || student.role !== student) {
+        if (!student || student.role !== Role.student) {
             res.status(404).json({ message: "Student not found." });
         }
         else {
@@ -54,7 +54,7 @@ export const deleteGrade = (req, res) => __awaiter(void 0, void 0, void 0, funct
     const { studentId, subject } = req.params;
     try {
         const student = yield userModel.findById(studentId);
-        if (!student || student.role !== student) {
+        if (!student || student.role !== Role.student) {
             res.status(404).json({ message: "Student not found." });
         }
         else {
@@ -84,7 +84,7 @@ export const getStudentsGrades = (req, res) => __awaiter(void 0, void 0, void 0,
     const { studentId } = req.params;
     try {
         const student = yield userModel.findById(studentId);
-        if (!student || student.role !== student) {
+        if (!student || student.role !== Role.student) {
             res.status(404).json({ message: "Student not found." });
         }
         else {
@@ -99,7 +99,7 @@ export const getStudentGradeAvg = (req, res) => __awaiter(void 0, void 0, void 0
     const { studentId } = req.params;
     try {
         const student = yield userModel.findById(studentId);
-        if (!student || student.role !== student) {
+        if (!student || student.role !== Role.student) {
             res.status(404).json({ message: "Student not found." });
         }
         else {

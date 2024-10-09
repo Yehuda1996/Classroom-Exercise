@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-enum Role {
+export enum Role {
     student = "student",
     teacher = "teacher"
 }
@@ -28,7 +28,8 @@ const UserSchema = new mongoose.Schema(
             type: [{subject: {type: String}, grade: {type: Number}}]
         },
         role: {
-            type: Role,
+            type: String,
+            enum: Object.values(Role),
             required: true
         }
     }

@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import userModel from "../models/userModel.js";
+import userModel, {Role} from "../models/userModel.js";
 
 
 export const addGrade = async (req: Request, res: Response) => {
     const {studentId, subject, grade} = req.body;
     try{
         const student = await userModel.findById(studentId);
-        if(!student || student.role !== student){
+        if(!student || student.role !== Role.student){
             res.status(404).json({message: "Student not found."});
         }
         else{
@@ -30,7 +30,7 @@ export const editGrade = async (req: Request, res: Response) => {
     const {studentId, subject, grade} = req.body;
     try{
         const student = await userModel.findById(studentId);
-        if(!student || student.role !== student){
+        if(!student || student.role !== Role.student){
             res.status(404).json({message: "Student not found."});
         }
         else{
@@ -53,7 +53,7 @@ export const deleteGrade = async (req: Request, res: Response) => {
     const {studentId, subject} = req.params;
     try{
         const student = await userModel.findById(studentId);
-        if(!student || student.role !== student){
+        if(!student || student.role !== Role.student){
             res.status(404).json({message: "Student not found."})
         }
         else{
@@ -86,7 +86,7 @@ export const getStudentsGrades = async (req: Request, res: Response) => {
     const {studentId} = req.params;
     try{
         const student = await userModel.findById(studentId);
-        if(!student || student.role !== student){
+        if(!student || student.role !== Role.student){
             res.status(404).json({message: "Student not found."})
         }
         else{
@@ -102,7 +102,7 @@ export const getStudentGradeAvg = async (req: Request, res: Response) => {
     const {studentId} = req.params;
     try{
         const student = await userModel.findById(studentId);
-        if(!student || student.role !== student){
+        if(!student || student.role !== Role.student){
             res.status(404).json({message: "Student not found."})
         }
         else{

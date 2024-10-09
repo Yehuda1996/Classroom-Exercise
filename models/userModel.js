@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-var Role;
+export var Role;
 (function (Role) {
     Role["student"] = "student";
     Role["teacher"] = "teacher";
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
         type: [{ subject: { type: String }, grade: { type: Number } }]
     },
     role: {
-        type: Role,
+        type: String,
         enum: Object.values(Role),
         required: true
     }

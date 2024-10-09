@@ -21,8 +21,7 @@ export const verifyToken = (req, res, next) => {
 };
 export const checkRole = (roles) => {
     return (req, res, next) => {
-        var _a;
-        if (!roles.includes((_a = req.user) === null || _a === void 0 ? void 0 : _a.roles)) {
+        if (!req.user || !roles.includes(req.user.role)) {
             res.status(403).json({ message: "Access denied." });
         }
         next();

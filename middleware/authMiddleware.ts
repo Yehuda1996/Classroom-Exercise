@@ -12,7 +12,6 @@ declare global {
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.auth_token || req.headers.authorization?.split(" ")[1];
-
     if(!token){
         res.status(403).json({message: "No token provided."})
     }
@@ -31,11 +30,11 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
     }
 };
 
-export const checkRole = (roles: Array<string>) => {
+export const checkRole = (roles: string[]) => {
     return (req: Request, res: Response, next: NextFunction) => {
-        if(!roles.includes(req.user?.roles)){ 
-            res.status(403).json({message: "Access denied."});
+        if (!req.user || !roles.includes(req.user.role)) { 
+            res.status(403).json({ message: "Access denied." });
         }
-        next();
+        next(); 
     };
 };
